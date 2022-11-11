@@ -1,27 +1,26 @@
-
 pipeline{
     tools{
         jdk 'myjava'
         maven 'mymaven'
     }
-	agent any
+	agent none
       stages{
            stage('Checkout'){
-	    
-               steps{
+              agent {label 'slave1'}
+              steps{
 		 echo 'cloning..'
-                 git 'https://github.com/Sonal0409/DevOpsClassCodes.git'
+                 git 'https://github.com/theitern/DevOpsClassCodes.git'
               }
           }
           stage('Compile'){
-             
+              agent {label 'slave1'}
               steps{
                   echo 'compiling..'
                   sh 'mvn compile'
 	      }
           }
           stage('CodeReview'){
-		  
+              agent {label 'slave2'}
               steps{
 		    
 		  echo 'codeReview'
@@ -29,7 +28,7 @@ pipeline{
               }
           }
            stage('UnitTest'){
-		  
+              agent {label 'slave2'}
               steps{
 	         echo 'Testing'
                   sh 'mvn test'
@@ -40,15 +39,11 @@ pipeline{
                }
            }	
           }
-           
           stage('Package'){
-		  
+              agent {label 'slave1'}
               steps{
-		  
                   sh 'mvn package'
               }
           }
-	     
-          
       }
 }
