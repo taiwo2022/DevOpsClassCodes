@@ -20,7 +20,7 @@ pipeline{
 	      }
           }
           stage('CodeReview'){
-              agent any
+              agent {label 'slave1'}
               steps{
 		    
 		  echo 'codeReview'
