@@ -6,7 +6,7 @@ pipeline{
 	agent none
       stages{
            stage('Checkout'){
-              agent {label 'slave1'}
+              agent any
               steps{
 		 echo 'cloning..'
                  git 'https://github.com/theitern/DevOpsClassCodes.git'
