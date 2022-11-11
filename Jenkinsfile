@@ -20,7 +20,7 @@ pipeline{
 	      }
           }
           stage('CodeReview'){
-              agent {label 'slave1'}
+              agent any
               steps{
 		    
 		  echo 'codeReview'
@@ -28,7 +28,7 @@ pipeline{
               }
           }
            stage('UnitTest'){
-              agent {label 'slave2'}
+              agent {label 'slave1'}
               steps{
 	         echo 'Testing'
                   sh 'mvn test'
